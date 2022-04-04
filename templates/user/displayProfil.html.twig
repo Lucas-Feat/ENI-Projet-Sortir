@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de : {{ user.pseudo }}{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+
+        <br>
+        <div class=" col-4 offset-4">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-5 p-3">
+                        {% if user.picture %}
+                            <img src="{{ asset('uploads/user_img/' ~  user.picture) }}" class="img-fluid rounded-start"
+                                 alt="Photo profil de {{ user.pseudo }}">
+                        {% else %}
+                            <img src="{{ asset('img/default-profile.png') }}" class="img-fluid rounded-start"
+                                 alt="Photo profil de {{ user.pseudo }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title ps-3">{{ user.pseudo }}</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Prénom : {{ user.firstName }}</li>
+                                <li class="list-group-item">Nom : {{ user.lastName }}</li>
+                                <li class="list-group-item">Téléphone : {{ user.phone }}</li>
+                                <li class="list-group-item">Email : {{ user.email }}</li>
+                                <li class="list-group-item">Campus : {{ user.campus.name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                {% if outing is defined %}
+                    <a href="{{ path('outing_details',{'id':outing.id}) }}" class="btn btn-outline-secondary">Retour</a>
+                {% else %}
+                    <a href="{{ path('app_outing') }}" class="btn btn-outline-secondary">Retour</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
